@@ -2,8 +2,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'browserify-rails/version'
+require "gem_helper/gem_utils"
 
 Gem::Specification.new do |spec|
+  utils = GemUtils.new(gem: spec)
   spec.name          = "browserify-rails"
   spec.version       = BrowserifyRails::VERSION
   spec.authors       = ["Henry Hsu, Cymen Vig"]
@@ -13,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/browserify-rails/browserify-rails"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = utils.gem_files_with_standard_exclusions
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
